@@ -23,7 +23,6 @@ var sc = stagecast;
 const socket = new WebSocket('wss://stagecast.se/api/events/hypeisland/ws');
 
 socket.addEventListener('open', function (event) {
-    var userId = sc.getUserId();
     var json = JSON.stringify({
         userId: sc.getUserId(),
         eventId: sc.getEventId(),
