@@ -2,6 +2,16 @@
 
 A secret project created for [LiveHacks #5](https://www.stagecast.io/livehacks/home).
 
+## Websockets
+
+Websockets are use for communication from the server to the clients.
+
+```
+wss://stagecast.se/api/events/{id}/ws
+```
+
+{id} is a well kept secret, only known by the inner circle.
+
 ## Tournament structure
 
 A `Tournament` consists of multiple `Rounds` where players.
@@ -25,3 +35,8 @@ The output of each `Match` is a winning team, and a potential new team.
 Same as `Click the Fastest` but number of clicks.
 
 #### Rock paper siscors
+
+## References
+
+- [wscat](https://www.npmjs.com/package/wscat) - cli to test websocket connections
+- [hype snake](https://www.youtube.com/watch?v=FMrQ8siiksQ) - cool game
