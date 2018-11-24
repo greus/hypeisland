@@ -38,3 +38,22 @@ socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     document.getElementById("log").innerHTML = event.data;
 });
+
+// UI code
+function hide(id) {
+    document.getElementById(id).classList.add('hidden');
+}
+
+function selectOption(option) {
+    console.log("You chose: ", option);
+    if (option === "rock") {
+        hide("paperIcon");
+        hide("scissorIcon");
+    } else if (option === "paper") {
+        hide("rockIcon");
+        hide("scissorIcon");
+    } else {
+        hide("paperIcon");
+        hide("rockIcon");
+    }
+}
