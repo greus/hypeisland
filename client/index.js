@@ -42,7 +42,7 @@ socket.addEventListener('message', function (event) {
 // UI code
 function hide(id) {
     document.getElementById(id).classList.add('hidden');
-}
+};
 
 function selectOption(option) {
     console.log("You chose: ", option);
@@ -56,4 +56,4 @@ function selectOption(option) {
         hide("paperIcon");
         hide("rockIcon");
     }
-}
+};
