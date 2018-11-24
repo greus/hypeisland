@@ -37,18 +37,32 @@
             .hidden {
                 display: none;
             }
+
+            .messageTop {
+                color: white;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: bold;
+                font-size: 32px;
+            }
+            .messageBottom {
+                color: white;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: bold;
+                font-size: 32px;
+            }
         </style>
 
     </head>
 
     <body>
-        
+        <span id='messageTop' class='messageTop'>Pick your move!</span>
         <!-- html code inside of the body tag -->
         <div class='gameContainer'>
             <img id='rockIcon' onClick='selectOption("rock")' class='selectionIcon' src="./img/rock.png" />
             <img id='paperIcon' onClick='selectOption("paper")' class='selectionIcon' src="./img/paper.png" />
-            <img id='scissorIcon' onClick='selectOption("scissor")' class='selectionIcon' src="./img/scissor.png" />
+            <img id='scissorIcon' onClick='selectOption("scissors")' class='selectionIcon' src="./img/scissor.png" />
         </div>
+        <span id='messageBottom' class='messageBottom'>You are playing against Johan.</span>
 
         <div id="log"></div>
 

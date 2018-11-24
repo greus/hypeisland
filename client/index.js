@@ -46,13 +46,15 @@ function hide(id) {
 
 function selectOption(option) {
     console.log("You chose: ", option);
+    document.getElementById("messageTop").innerHTML = "You selected " + option + ".";
+    document.getElementById("messageBottom").innerHTML = "Waiting for opponents...";
     if (option === "rock") {
         hide("paperIcon");
         hide("scissorIcon");
     } else if (option === "paper") {
         hide("rockIcon");
         hide("scissorIcon");
-    } else {
+    } else if (option === "scissors") {
         hide("paperIcon");
         hide("rockIcon");
     }
