@@ -6,7 +6,7 @@ A secret project created for [LiveHacks #5](https://www.stagecast.io/livehacks/h
 
 Websockets are use for communication from the server to the clients.
 
-```
+```bash
 wss://stagecast.se/api/events/{id}/ws
 ```
 
@@ -26,7 +26,7 @@ A `Round` consists of multiple `Matches`.
 
 The output of each `Match` is a winning team, and a potential new team.
 
-#### Click the fastest (ongoing)
+### Click the fastest (ongoing)
 
 `Click the Fastest` is a very simple game, whoever clicks a button the fastest, is the winner. If a team is playing, the average time of the team is used to decide the winner.
 
