@@ -37,7 +37,7 @@ socket.addEventListener('message', function (event) {
 
     var message = JSON.parse(event.data);
 
-    var regardsCurrentUser = message.userId === sc().userId();
+    var regardsCurrentUser = message.userId === sc().getUserId();
 
     if (message.type === "client_info" && regardsCurrentUser) {
         setScene(message);
