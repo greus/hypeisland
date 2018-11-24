@@ -1,4 +1,3 @@
-// for local test purposes
 if (!stagecast) {
     var stagecast = {
         getUserId: function () {
@@ -17,14 +16,12 @@ if (!stagecast) {
             return "56 57";
         },
     };
-}
+};
 
 var sc = stagecast;
 
-// Create WebSocket connection.
 const socket = new WebSocket('wss://stagecast.se/api/events/hypeisland/ws');
 
-// Connection opened
 socket.addEventListener('open', function (event) {
     var userId = sc.getUserId();
     var json = JSON.stringify({
@@ -38,7 +35,6 @@ socket.addEventListener('open', function (event) {
     socket.send(json);
 });
 
-// Listen for messages
 socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     document.getElementById("log").innerHTML = event.data;
