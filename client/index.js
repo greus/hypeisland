@@ -42,6 +42,10 @@ function broadcast(obj) {
     return obj;
 };
 
+document.getElementById('rockIcon').addEventListener('ontouchdstart', () => selectOption('rock'));
+document.getElementById('paperIcon').addEventListener('ontouchstart', () => selectOption('paper'));
+document.getElementById('scissorIcon').addEventListener('ontouchstart', () => selectOption('scissors'));
+
 // UI code
 function hide(id) {
     document.getElementById(id).classList.add('hidden');
