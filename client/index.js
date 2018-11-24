@@ -23,21 +23,24 @@ var sc = stagecast;
 const socket = new WebSocket('wss://stagecast.se/api/events/hypeisland/ws');
 
 socket.addEventListener('open', function (event) {
-    var json = JSON.stringify({
-        userId: sc.getUserId(),
-        eventId: sc.getEventId(),
-        momentId: sc.getMomentId(),
-        token: sc.getToken(),
-        coordinates: sc.getCoordinates()
-    });
+    var json = broadcast({});
     console.log("Client opened socket", json);
-    socket.send(json);
 });
 
 socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     document.getElementById("log").innerHTML = event.data;
 });
+
+function broadcast(obj) {
+    obj.userId = sc.getUserId();
+    obj.eventId = sc.getEventId();
+    obj.momentId = sc.getMomentId();
+
+    var stringified = JSON.stringify(obj);
+    socket.send(stringified);
+    return obj;
+};
 
 // UI code
 function hide(id) {
