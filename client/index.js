@@ -68,8 +68,7 @@ function setScene(message) {
         hide("paperIcon");
         hide("scissorIcon");
         setText("messageTop", "Waiting for more players...");
-    }
-    if (message.view === "match") {
+    } else if (message.view === "match") {
         show("messageTop");
         show("messageBottom");
         show("rockIcon");
