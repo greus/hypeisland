@@ -30,6 +30,14 @@ socket.addEventListener('open', function (event) {
 socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     document.getElementById("log").innerHTML = event.data;
+
+    var message = JSON.parse(event.data);
+
+    var regardsCurrentUser = message.userId === "1"; // todo sc.userId()
+
+    if (message.type === "client_info" && regardsCurrentUser) {
+        setScene(message);
+    }
 });
 
 function broadcast(obj) {
@@ -47,6 +55,36 @@ document.getElementById('paperIcon').addEventListener('ontouchstart', () => sele
 document.getElementById('scissorIcon').addEventListener('ontouchstart', () => selectOption('scissors'));
 
 // UI code
+function setScene(message) {
+    if (message.view === "match") {
+        show("messageTop");
+        show("rockIcon");
+        show("paperIcon");
+        show("scissorIcon");
+        setText("messageBottom", message.info);
+    } else if (message.view === "result") {
+        hide("rockIcon");
+        hide("paperIcon");
+        hide("scissorIcon");
+        setText("messageBottom", message.info);
+    } else {
+        // end
+        hide("messageTop");
+        hide("rockIcon");
+        hide("paperIcon");
+        hide("scissorIcon");
+        setText("messageBottom", "This is the end");
+    }
+};
+
+function setText(id, text) {
+    document.getElementById(id).innerHTML = text;
+};
+
+function show(id) {
+    document.getElementById(id).classList.remove('hidden');
+};
+
 function hide(id) {
     document.getElementById(id).classList.add('hidden');
 };
