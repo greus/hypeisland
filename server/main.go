@@ -28,7 +28,7 @@ type GameState struct {
 	NumUsers int    `json:"numUsers"`
 	//	Users      []User               `json:"users"`
 	Round      int                  `json:"round"`
-	UserStates map[string]UserState `json:"userStates"`
+	UserStates map[string]UserState `json:"userStates",omitempty`
 }
 
 type UserState map[string]string
@@ -44,15 +44,15 @@ var users = map[string]UserView{}
 var gs GameState
 var gsMutex sync.Mutex
 
+//, users []User
 func startTournament(momentID string) {
 	gs = GameState{
 		Type:     "server_info",
 		MomentID: momentID,
 		NumUsers: 10,
-		//		Users:    []User{},
+		//		Users:    users,
 		Round: 0,
 	}
-
 }
 
 func updateMomentGlobalState(momentID string) {
@@ -103,19 +103,7 @@ func main() {
 	flag.Parse()
 	log.SetFlags(0)
 
-	for _, userID := range []string{
-		"1",
-		"2",
-		"3",
-		"4",
-	} {
-		users[userID] = UserView{
-			Type:   "client_info",
-			UserID: userID,
-			View:   "match",
-			Info:   "This is a match! Don't lose.",
-		}
-	}
+	connectedUsers := []string{}
 
 	xtoken = *xtokenFlag
 	momentID := "60FCD373-2D61-47AB-B7DA-D2561DDFA66D"
@@ -137,20 +125,37 @@ func main() {
 
 	//sendChan := make(chan interface{})
 	done := make(chan struct{})
-
 	startTournament(momentID)
 
 	go func() {
 		defer close(done)
 		for {
-			_, message, err := c.ReadMessage()
+			//_, message, err := c.ReadMessage()
+			userInfo := make(map[string]string)
+			err := c.ReadJSON(&userInfo)
+
+			//{"userId":"yohann.greus@gmail.com","eventId":"64DF996A-C113-4A26-AB00-6E188C9FC215","momentId":"179294D7-301B-4EA4-8D7E-94FC8F485E76"}
+
+			if val, ok := dict["userId"]; ok {
+				connectedUsers = append(connectedUsers, dict["userId"])
+			}
+
+			log.Println(userInfo)
 			if err != nil {
 				log.Println("read:", err)
 				return
 			}
-			log.Printf("recv: %s", message)
 		}
 	}()
+
+	for _, userID := range connectedUsers {
+		users[userID] = UserView{
+			Type:   "client_info",
+			UserID: userID,
+			View:   "match",
+			Info:   "First match!",
+		}
+	}
 
 	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
