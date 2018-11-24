@@ -57,11 +57,21 @@ function broadcast(obj) {
 document.getElementById('rockIcon').addEventListener('ontouchdstart', () => selectOption('rock'));
 document.getElementById('paperIcon').addEventListener('ontouchstart', () => selectOption('paper'));
 document.getElementById('scissorIcon').addEventListener('ontouchstart', () => selectOption('scissors'));
+setScene();
 
 // UI code
 function setScene(message) {
+    if (!message) {
+        show("messageTop");
+        hide("messageBottom");
+        hide("rockIcon");
+        hide("paperIcon");
+        hide("scissorIcon");
+        setText("messageTop", "Waiting for more players...");
+    }
     if (message.view === "match") {
         show("messageTop");
+        show("messageBottom");
         show("rockIcon");
         show("paperIcon");
         show("scissorIcon");
@@ -70,6 +80,8 @@ function setScene(message) {
         hide("rockIcon");
         hide("paperIcon");
         hide("scissorIcon");
+        hide("messageTop");
+        show("messageBottom");
         setText("messageBottom", message.info);
     } else {
         // end
@@ -77,6 +89,7 @@ function setScene(message) {
         hide("rockIcon");
         hide("paperIcon");
         hide("scissorIcon");
+        show("messageBottom");
         setText("messageBottom", "This is the end");
     }
 };
