@@ -1,9 +1,9 @@
-var sc = function() {
+function sc() {
     try {
         return stagecast;
     } catch (error) {
         // ignore target defense
-    }
+    };
 
     return {
         getUserId: function () {
