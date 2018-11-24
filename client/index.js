@@ -74,6 +74,7 @@ function setScene(message) {
         show("rockIcon");
         show("paperIcon");
         show("scissorIcon");
+        setText("messageTop", "Pick your move!");
         setText("messageBottom", message.info);
     } else if (message.view === "result") {
         hide("rockIcon");
