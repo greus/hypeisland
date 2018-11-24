@@ -1,5 +1,11 @@
-if (!stagecast) {
-    var stagecast = {
+var sc = function() {
+    try {
+        return stagecast;
+    } catch (error) {
+        // ignore target defense
+    }
+
+    return {
         getUserId: function () {
             return "1234";
         },
@@ -18,8 +24,6 @@ if (!stagecast) {
     };
 };
 
-var sc = stagecast;
-
 const socket = new WebSocket('wss://stagecast.se/api/events/hypeisland/ws');
 
 socket.addEventListener('open', function (event) {
@@ -33,7 +37,7 @@ socket.addEventListener('message', function (event) {
 
     var message = JSON.parse(event.data);
 
-    var regardsCurrentUser = message.userId === "1"; // todo sc.userId()
+    var regardsCurrentUser = message.userId === "1"; // todo sc().userId()
 
     if (message.type === "client_info" && regardsCurrentUser) {
         setScene(message);
@@ -41,9 +45,9 @@ socket.addEventListener('message', function (event) {
 });
 
 function broadcast(obj) {
-    obj.userId = sc.getUserId();
-    obj.eventId = sc.getEventId();
-    obj.momentId = sc.getMomentId();
+    obj.userId = sc().getUserId();
+    obj.eventId = sc().getEventId();
+    obj.momentId = sc().getMomentId();
 
     var stringified = JSON.stringify(obj);
     socket.send(stringified);
