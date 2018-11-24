@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Hype Island</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.js"></script>
+  </head>
+  <body>
+    <div class="demo"></div>
+  </body>
+  <button>aaaa</button>
+  <script>
+    var minimalData = {
+      teams: [
+        ["Team 1", "Team 2"] /* first matchup */,
+        ["Team 3", "Team 4"] /* second matchup */,
+        ["Team 5", "Team 6"] /* second matchup */,
+        ["Team 7", "Team 8"]
+      ],
+      results: [
+        [[1, 0], [3, 4], [5, null], [null, null]] /* first round */,
+        [[1, 0]],
+        [[1, 0]]
+      ]
+    };
+
+    var minimalData2 = {
+      teams: [
+        ["Team 1", "Team 2"] /* first matchup */,
+        ["Team 3", "Team 4"] /* second matchup */,
+        ["Team 5", "Team 6"] /* second matchup */,
+        ["Team 7", "Team 9"]
+      ],
+      results: [
+        [[1, 0], [3, 4], [5, null], [null, null]] /* first round */,
+        [[0, 1]],
+        [[0, 1]]
+      ]
+    };
+
+    var minimalData3 = {
+      teams: [["Team 1", "Team 2"], ["Team 3", "Team 4"]],
+      results: [[0, 0], [0, 0], [0, 0]]
+    };
+
+    $(function() {
+      $(".demo").bracket({
+        init: minimalData /* data to initialize the bracket with */
+      });
+    });
+
+    $("button").click(function() {
+      $(".demo").bracket({
+        init: minimalData3 /* data to initialize the bracket with */
+      });
+    });
+  </script>
+</html>
